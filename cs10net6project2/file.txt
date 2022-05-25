@@ -1,0 +1,9 @@
+﻿-Invocation expression operator ()
+to call a method or invoke a delegate
+
+-Member access operator .
+to access a member of namespace or a type
+
+-gotofail bug on iphone
+carly braces have been omitted with if statement
+2 gotofail statement by error => skip other if statements after this line
