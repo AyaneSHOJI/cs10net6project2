@@ -7,3 +7,15 @@ to access a member of namespace or a type
 -gotofail bug on iphone
 carly braces have been omitted with if statement
 2 gotofail statement by error => skip other if statements after this line
+
+-binary shift operators
+x = 3 << 2;
+the << operatos shift its lef-hand operand left by the number of bits defined by its right-hand operand
+in this case,
+00000011 = 1+2 = 3
+00001100 = 4+8 = 12
+
+y = 10 >> 1;
+in this case,
+000001010 = 2+8 = 10
+000000101 = 4+1 = 5

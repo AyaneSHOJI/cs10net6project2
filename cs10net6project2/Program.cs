@@ -177,43 +177,75 @@ int age = int.Parse("27");
 DateTime birthday = DateTime.Parse("4 July 1980");
 WriteLine($"I was born {age} years ago, My birthday is {birthday} / {birthday:D}");
 
-//p.120 Avoiding Parse error exception with TryParse
-Write("How many eggs are thers?");
-string? input = ReadLine(); 
+////p.120 Avoiding Parse error exception with TryParse
+//Write("How many eggs are thers?");
+//string? input = ReadLine(); 
 
-if(int.TryParse(input, out int count))
-{
-    WriteLine($"There are {count} eggs.");
-}
-else
-{
-    WriteLine($"I could not parse the input");
-}
+//if(int.TryParse(input, out int count))
+//{
+//    WriteLine($"There are {count} eggs.");
+//}
+//else
+//{
+//    WriteLine($"I could not parse the input");
+//}
 
-//p.121 Try block
-//we add general exception at the beginnin, then add specific exceptions above 
-WriteLine("Before parsing");
-Write("What is your age?");
-string? input2 = ReadLine();
+////p.121 Try block
+////we add general exception at the beginnin, then add specific exceptions above 
+//WriteLine("Before parsing");
+//Write("What is your age?");
+//string? input2 = ReadLine();
 
-try
-{
-    int age2 = int.Parse(input2);
-    WriteLine($"Your are {age2} years old.");
-}
-catch (OverflowException)
-{
-    WriteLine("Your age is a valid number format but it is either too big or too small");
-}
-catch (FormatException)
-{
-    WriteLine("The age you entered is not a valid number format.");
-}
-catch(Exception ex)
-{
-    //never use empty catch statement in production !
-    //p.123 Catching all exceptions
-    WriteLine($"{ex.GetType()} says {ex.Message}");
-}
-WriteLine("After parsing");
+//try
+//{
+//    int age2 = int.Parse(input2);
+//    WriteLine($"Your are {age2} years old.");
+//}
+//catch (OverflowException)
+//{
+//    WriteLine("Your age is a valid number format but it is either too big or too small");
+//}
+//catch (FormatException)
+//{
+//    WriteLine("The age you entered is not a valid number format.");
+//}
+//catch(Exception ex)
+//{
+//    //never use empty catch statement in production !
+//    //p.123 Catching all exceptions
+//    WriteLine($"{ex.GetType()} says {ex.Message}");
+//}
+//WriteLine("After parsing");
+
+////p.125 Catching with filters
+////we can add filters with "when" keyword
+//Write("Enter an amount: ");
+//string? amount = ReadLine(); 
+//try
+//{
+//    decimal amountValue = decimal.Parse(amount);
+//}
+//catch(FormatException) when (amount.Contains("$"))
+//{
+//    WriteLine("Amounts cannot use the dollar sign!");
+//}
+//catch(FormatException){
+//    WriteLine("Amount mus only contain digits!");
+//}
+
+////Checking for overdflow
+////without checked statement, the third one has been arounded to large negative value : -2147483648
+//checked
+//{
+//    int x = int.MaxValue - 1;
+//    WriteLine($"Initial value : {x}");
+//    x++;
+//    WriteLine($"after incrementing : {x}");
+//    x++;
+//    WriteLine($"after incrementing : {x}");//Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.
+//    x++;
+//    WriteLine($"after incrementing : {x}");
+//}
+
+WriteLine(byte.MaxValue);
 
