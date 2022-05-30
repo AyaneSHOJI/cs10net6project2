@@ -54,49 +54,50 @@ A_label:
 WriteLine($"After A_label");
 
 //Pattern matching with switch
-//string path = @"C:\Users\Ayane\Repo\cs10net6project2";
-//Write("Press R for read-only or W for writable :");
-//ConsoleKeyInfo key = ReadKey();
-//WriteLine();
+string path = @"C:\Users\Ayane\Repo\cs10net6project2";
+Write("Press R for read-only or W for writable :");
+ConsoleKeyInfo key = ReadKey();
+WriteLine();
 
 Stream? s;
 
-//if(key.Key == ConsoleKey.R)
-//{
-//    s = File.Open(
-//        Path.Combine(path, "file.txt"),
-//        FileMode.OpenOrCreate,
-//        FileAccess.Read);
-//}
-//else
-//{
-//    s = File.Open(
-//        Path.Combine(path, "file.txt"),
-//        FileMode.OpenOrCreate,
-//        FileAccess.Write);
-//}
+if (key.Key == ConsoleKey.R)
+{
+    s = File.Open(
+        Path.Combine(path, "file.txt"),
+        FileMode.OpenOrCreate,
+        FileAccess.Read);
+}
+else
+{
+    s = File.Open(
+        Path.Combine(path, "file.txt"),
+        FileMode.OpenOrCreate,
+        FileAccess.Write);
+}
 
-//string message;
+string message;
 
-//switch(s){
-//    case FileStream writableFile when s.CanWrite:
-//        message = "The stream is a file that I can write to.";
-//        break;
-//    case FileStream readOnlyFile:
-//        message = "The stream is a read-only file.";
-//        break;
-//    case MemoryStream ms:
-//        message = "The stream is a memory address.";
-//        break;
-//    default:
-//        message = "The stream is some other type.";
-//        break;
-//    case null:
-//        message = "The stream is null.";
-//        break;
-//}
+switch (s)
+{
+    case FileStream writableFile when s.CanWrite:
+        message = "The stream is a file that I can write to.";
+        break;
+    case FileStream readOnlyFile:
+        message = "The stream is a read-only file.";
+        break;
+    case MemoryStream ms:
+        message = "The stream is a memory address.";
+        break;
+    default:
+        message = "The stream is some other type.";
+        break;
+    case null:
+        message = "The stream is null.";
+        break;
+}
 
-//WriteLine(message);
+WriteLine(message);
 
 //This bloc can be simplified as below with C# 8.0 or later
 /*
@@ -120,14 +121,14 @@ WriteLine(message);
 //the Boolean expression is checked at the bottom of the block instead of the top = the block always executes at leat once
 string? password;
 
-//do
-//{
-//    Write("Enter your password: ");
-//    password = ReadLine();
-//}
-//while (password != "Pa$$w0rd");
+do
+{
+    Write("Enter your password: ");
+    password = ReadLine();
+}
+while (password != "Pa$$w0rd");
 
-//WriteLine("Correct!");
+WriteLine("Correct!");
 
 //Convert
 //Casting vc Converting : converting rounds the doulble values 9.8 up to 10 instead of trimming the part after decimal point
@@ -177,75 +178,76 @@ int age = int.Parse("27");
 DateTime birthday = DateTime.Parse("4 July 1980");
 WriteLine($"I was born {age} years ago, My birthday is {birthday} / {birthday:D}");
 
-////p.120 Avoiding Parse error exception with TryParse
-//Write("How many eggs are thers?");
-//string? input = ReadLine(); 
+//p.120 Avoiding Parse error exception with TryParse
+Write("How many eggs are thers?");
+string? input = ReadLine();
 
-//if(int.TryParse(input, out int count))
-//{
-//    WriteLine($"There are {count} eggs.");
-//}
-//else
-//{
-//    WriteLine($"I could not parse the input");
-//}
+if (int.TryParse(input, out int count))
+{
+    WriteLine($"There are {count} eggs.");
+}
+else
+{
+    WriteLine($"I could not parse the input");
+}
 
-////p.121 Try block
-////we add general exception at the beginnin, then add specific exceptions above 
-//WriteLine("Before parsing");
-//Write("What is your age?");
-//string? input2 = ReadLine();
+//p.121 Try block
+//we add general exception at the beginnin, then add specific exceptions above 
+WriteLine("Before parsing");
+Write("What is your age?");
+string? input2 = ReadLine();
 
-//try
-//{
-//    int age2 = int.Parse(input2);
-//    WriteLine($"Your are {age2} years old.");
-//}
-//catch (OverflowException)
-//{
-//    WriteLine("Your age is a valid number format but it is either too big or too small");
-//}
-//catch (FormatException)
-//{
-//    WriteLine("The age you entered is not a valid number format.");
-//}
-//catch(Exception ex)
-//{
-//    //never use empty catch statement in production !
-//    //p.123 Catching all exceptions
-//    WriteLine($"{ex.GetType()} says {ex.Message}");
-//}
-//WriteLine("After parsing");
+try
+{
+    int age2 = int.Parse(input2);
+    WriteLine($"Your are {age2} years old.");
+}
+catch (OverflowException)
+{
+    WriteLine("Your age is a valid number format but it is either too big or too small");
+}
+catch (FormatException)
+{
+    WriteLine("The age you entered is not a valid number format.");
+}
+catch (Exception ex)
+{
+    //never use empty catch statement in production !
+    //p.123 Catching all exceptions
+    WriteLine($"{ex.GetType()} says {ex.Message}");
+}
+WriteLine("After parsing");
 
-////p.125 Catching with filters
-////we can add filters with "when" keyword
-//Write("Enter an amount: ");
-//string? amount = ReadLine(); 
-//try
-//{
-//    decimal amountValue = decimal.Parse(amount);
-//}
-//catch(FormatException) when (amount.Contains("$"))
-//{
-//    WriteLine("Amounts cannot use the dollar sign!");
-//}
-//catch(FormatException){
-//    WriteLine("Amount mus only contain digits!");
-//}
+//p.125 Catching with filters
+//we can add filters with "when" keyword
+Write("Enter an amount: ");
+string? amount = ReadLine();
+try
+{
+    decimal amountValue = decimal.Parse(amount);
+}
+catch (FormatException) when (amount.Contains("$"))
+{
+    WriteLine("Amounts cannot use the dollar sign!");
+}
+catch (FormatException)
+{
+    WriteLine("Amount mus only contain digits!");
+}
 
-////Checking for overdflow
-////without checked statement, the third one has been arounded to large negative value : -2147483648
-//checked
-//{
-//    int x = int.MaxValue - 1;
-//    WriteLine($"Initial value : {x}");
-//    x++;
-//    WriteLine($"after incrementing : {x}");
-//    x++;
-//    WriteLine($"after incrementing : {x}");//Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.
-//    x++;
-//    WriteLine($"after incrementing : {x}");
-//}
+//Checking for overdflow
+//without checked statement, the third one has been arounded to large negative value : -2147483648
+checked
+{
+    int x = int.MaxValue - 1;
+    WriteLine($"Initial value : {x}");
+    x++;
+    WriteLine($"after incrementing : {x}");
+    x++;
+    WriteLine($"after incrementing : {x}");//Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.
+    x++;
+    WriteLine($"after incrementing : {x}");
+}
 
 WriteLine(byte.MaxValue);
 
